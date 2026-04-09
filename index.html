@@ -3,99 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>واجهة الخدمات التقنية - الجدول العام</title>
+    <title>واجهة الخدمات التقنية - الرئيسية</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-   <style>
-    body { background-color: #f0f2f5; font-family: 'Segoe UI', Tahoma, sans-serif; }
-    
-    .hero-section { 
-        background: white; 
-        padding: 50px 20px; 
-        border-bottom-left-radius: 40px; 
-        border-bottom-right-radius: 40px; 
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
-        text-align: center; 
-    }
+    <style>
+        /* خلفية رمادية خفيفة مثل فيسبوك */
+        body { background-color: #f0f2f5; font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; padding-bottom: 50px; }
+        
+        /* قسم الرأس الأبيض */
+        .hero-section { 
+            background: white; 
+            padding: 30px 15px; 
+            border-bottom: 1px solid #ddd;
+            text-align: center; 
+            margin-bottom: 20px;
+        }
 
-    /* تنسيق اللوجو الجديد */
-    .logo-container {
-        width: 120px;
-        height: 120px;
-        margin: 0 auto 20px;
-        border-radius: 50%;
-        overflow: hidden;
-        border: 4px solid #0078ff;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-    .logo-container img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
+        /* حاوية اللوجوlogos.png */
+        .logo-container {
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid #0866ff; /* أزرق فيسبوك */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .logo-container img { width: 100%; height: 100%; object-fit: cover; }
 
-    /* تنسيق النصوص المتحركة الملونة */
-    .animated-text { 
-        font-size: 1.5rem; /* تكبير الخط */
-        font-weight: bold;
-        height: 40px; /* زيادة المساحة */
-        overflow: hidden; 
-        position: relative;
-        margin-top: 15px;
-    }
-    .animated-text span { 
-        display: block; 
-        animation: slide 6s infinite; 
-    }
+        /* النصوص المتحركة الملونة والمكبرة */
+        .animated-text { 
+            font-size: 1.5rem; 
+            font-weight: bold;
+            height: 40px; 
+            overflow: hidden; 
+            margin: 15px 0;
+            position: relative;
+        }
+        .animated-text span { display: block; animation: slide 6s infinite; }
+        .t1 { color: #0866ff; } /* أزرق */
+        .t2 { color: #f33e58; } /* أحمر فيسبوك */
+        .t3 { color: #42b72a; } /* أخضر */
 
-    /* ألوان مختلفة لكل جملة */
-    .text-1 { color: #0078ff; } /* أزرق */
-    .text-2 { color: #e91e63; } /* وردي محمر */
-    .text-3 { color: #42b72a; } /* أخضر */
+        @keyframes slide {
+            0%, 20% { transform: translateY(0); }
+            33%, 53% { transform: translateY(-40px); }
+            66%, 86% { transform: translateY(-80px); }
+            100% { transform: translateY(0); }
+        }
 
-    @keyframes slide {
-        0%, 20% { transform: translateY(0); }
-        33%, 53% { transform: translateY(-40px); }
-        66%, 86% { transform: translateY(-80px); }
-        100% { transform: translateY(0); }
-    }
-</style>
+        /* أزرار على شكل فيسبوك */
+        .fb-btn-group { display: flex; gap: 10px; max-width: 500px; margin: 0 auto; padding: 0 10px; }
+        .fb-btn { 
+            flex: 1; border: none; border-radius: 8px; padding: 12px; 
+            font-weight: bold; text-decoration: none; display: flex; 
+            align-items: center; justify-content: center; gap: 8px; 
+            transition: 0.2s;
+        }
+        .btn-blue { background: #0866ff; color: white !important; }
+        .btn-gray { background: #e4e6eb; color: #050505 !important; }
+        .fb-btn:active { transform: scale(0.98); }
+
+        /* حاوية "بوست" فيسبوك للجدول */
+        .fb-post-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+        .post-header { 
+            border-bottom: 1px solid #f0f2f5; 
+            padding-bottom: 10px; 
+            margin-bottom: 15px; 
+            font-weight: bold; 
+            color: #65676b;
+            display: flex;
+            align-items: center;
+        }
+        
+        /* تنسيق جدول المواعيد */
+        .table { margin-bottom: 0; }
+        .time-tag { 
+            color: #d32f2f; /* أحمر غامق */
+            font-size: 0.75rem; 
+            font-weight: 600; 
+            display: block; 
+            margin-top: 2px;
+        }
+    </style>
 </head>
 <body>
+
 <div class="hero-section">
     <div class="logo-container">
-    <img src="logos.png" alt="لوجو المحل">
-</div>
-    <h1 class="fw-bold text-dark" style="font-size: 2.2rem;">اسم المحل التجاري</h1> 
+        <img src="logos.png" alt="Logo">
+    </div>
+    <h2 class="fw-bold" style="color: #050505;">صورة و صوت </h2>
     
     <div class="animated-text">
-        <span class="text-1">نقدم أفضل خدمات الساوند سستم 🔊</span>
-        <span class="text-2">تصوير فوتوغرافي وفيديو احترافي 📸</span>
-        <span class="text-3">نسعد بخدمتكم في جميع مناسباتكم ✨</span>
-    </div>
-    
+        <span class="t1">نقدم أفضل خدمات الساوند سستم 🔊</span>
+        <span class="t2">تصوير فوتوغرافي وفيديو احترافي 📸</span>
+        <span class="t3">نسعد بخدمتكم في جميع مناسباتكم ✨</span>
     </div>
 
-    <div class="main-buttons container">
-        <a href="booking.html" class="btn-custom btn-booking shadow">
-            <i class="fas fa-calendar-plus"></i> حجز جديد
+    <div class="fb-btn-group">
+        <a href="booking.html" class="fb-btn btn-blue shadow-sm">
+            <i class="fas fa-plus-circle"></i> حجز جديد
         </a>
-        <button onclick="goToAdmin()" class="btn-custom btn-admin shadow">
+        <button onclick="goToAdmin()" class="fb-btn btn-gray shadow-sm">
             <i class="fas fa-user-shield"></i> الإدارة
         </button>
     </div>
 </div>
 
-<div class="container public-table-section">
-    <h5 class="mb-4 text-secondary text-center fw-bold"><i class="fas fa-calendar-alt me-2"></i> جدول المواعيد والارتباطات</h5>
-    <div class="card card-table overflow-hidden">
+<div class="container px-2">
+    <div class="fb-post-card">
+        <div class="post-header">
+            <i class="fas fa-calendar-alt me-2 text-primary"></i> جدول المواعيد والارتباطات
+        </div>
         <div class="table-responsive">
-            <table class="table table-hover align-middle mb-0 text-center">
-                <thead class="table-primary">
-                    <tr>
-                        <th class="py-3">اليوم والزمن</th>
-                        <th class="py-3">الخدمة</th>
-                        <th class="py-3">الموقع</th>
+            <table class="table table-borderless text-center align-middle">
+                <thead>
+                    <tr class="text-secondary small border-bottom">
+                        <th class="pb-2">التاريخ والزمن</th>
+                        <th class="pb-2">الخدمة</th>
+                        <th class="pb-2">الموقع</th>
                     </tr>
                 </thead>
                 <tbody id="publicTable">
@@ -109,7 +143,7 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-    // --- ضع بيانات Firebase الخاصة بك هنا ---
+    // --- ضع بيانات Firebase الخاصة بك هنا ليعمل الموقع ---
     const firebaseConfig = {
   apiKey: "AIzaSyAKwgSqT8Aic3zk5GvliH7YJgX4POD_l8o",
   authDomain: "soundsystemapp.firebaseapp.com",
@@ -132,42 +166,45 @@
             tableBody.innerHTML = "";
             
             if (querySnapshot.empty) {
-                tableBody.innerHTML = "<tr><td colspan='3' class='py-4 text-muted'>لا توجد مواعيد محجوزة حالياً</td></tr>";
+                tableBody.innerHTML = "<tr><td colspan='3' class='py-4 text-muted'>لا توجد مواعيد حالياً</td></tr>";
                 return;
             }
 
             querySnapshot.forEach((doc) => {
                 const data = doc.data();
                 tableBody.innerHTML += `
-                    <tr>
+                    <tr style="border-bottom: 1px solid #f0f2f5;">
                         <td class="py-3">
-                            <span class="badge bg-light text-dark border badge-date">${data.date}</span>
-                            <span class="time-info">
-                                <i class="far fa-clock me-1"></i> 
-                                ${data.timeRange ? data.timeRange : 'كامل اليوم'}
-                            </span>
+                            <div class="fw-bold" style="color: #050505; font-size: 0.95rem;">${data.date}</div>
+                            <div class="time-tag">
+                                <i class="far fa-clock" style="font-size: 0.7rem;"></i> 
+                                ${data.timeRange || 'طوال اليوم'}
+                            </div>
                         </td>
-                        <td class="fw-bold text-primary">${data.service}</td>
-                        <td><small class="text-secondary"><i class="fas fa-map-marker-alt"></i> ${data.location}</small></td>
+                        <td class="text-primary fw-bold" style="font-size: 0.9rem;">${data.service}</td>
+                        <td>
+                            <small class="text-muted" style="font-size: 0.8rem;">
+                                <i class="fas fa-map-marker-alt" style="font-size: 0.7rem;"></i> ${data.location}
+                            </small>
+                        </td>
                     </tr>
                 `;
             });
         } catch (error) {
-            console.error("خطأ في جلب البيانات:", error);
+            console.error("خطأ في التحميل:", error);
         }
     }
 
-    // دالة الانتقال لصفحة الإدارة بالرمز السري
     window.goToAdmin = () => {
-        const pass = prompt("الرجاء إدخال رمز الدخول (الإدارة):");
-        if(pass === "123") { // يمكنك تغيير الرمز من هنا
-            window.location.href = "admin_panel.html"; 
-        } else if (pass !== null) {
-            alert("رمز الدخول غير صحيح!");
+        const pass = prompt("الرمز السري للدخول:");
+        if(pass === "123") {
+            window.location.href = "admin_panel.html";
+        } else if(pass !== null) {
+            alert("عذراً، الرمز خاطئ.");
         }
     }
 
-    // تشغيل الجلب التلقائي عند فتح الصفحة
+    // تشغيل الدالة فور فتح الصفحة
     loadPublicData();
 </script>
 
