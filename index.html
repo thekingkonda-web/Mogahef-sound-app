@@ -3,38 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نظام إدارة الحجوزات والحسابات</title>
+    <title>لوحة تحكم الحجوزات - الإدارة</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f8f9fa; padding-bottom: 40px; }
-        .navbar { background: #2c3e50; color: white; margin-bottom: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f6; padding-bottom: 50px; }
+        .navbar { background: #2c3e50; color: white; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
         .card { border: none; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
         .table-container { background: white; border-radius: 15px; padding: 20px; margin-top: 20px; }
         .btn-save { background-color: #27ae60; color: white; border: none; font-weight: bold; }
-        .btn-save:hover { background-color: #219150; color: white; }
         .text-remaining { color: #e74c3c; font-weight: bold; }
-        .badge-service { background-color: #8e44ad; }
+        .location-text { color: #2980b9; font-size: 0.85rem; }
     </style>
 </head>
 <body>
 
-<nav class="navbar py-3 text-center">
-    <div class="container">
-        <h4 class="mb-0"><i class="fas fa-camera-retro me-2"></i> إدارة حجوزات الصوت والتصوير</h4>
+<nav class="navbar py-3">
+    <div class="container d-flex justify-content-between align-items-center">
+        <h4 class="mb-0 text-white"><i class="fas fa-tasks me-2"></i> إدارة الحجوزات</h4>
+        <div class="d-flex gap-2">
+            <a href="booking.html" class="btn btn-sm btn-success fw-bold">
+                <i class="fas fa-plus-circle me-1"></i> حجز جديد
+            </a>
+            <button onclick="copyCustomerLink()" class="btn btn-sm btn-light text-dark fw-bold">
+                <i class="fas fa-copy"></i>
+            </button>
+        </div>
     </div>
 </nav>
 
+
 <div class="container">
-    <div class="card p-4">
-        <h5 class="mb-4 text-primary border-bottom pb-2"><i class="fas fa-plus-circle"></i> إضافة حجز مالي وإداري</h5>
+    <div class="card p-4 mb-4">
+        <h5 class="mb-4 text-primary border-bottom pb-2"><i class="fas fa-plus-circle"></i> إضافة حجز مؤكد</h5>
         <form id="bookingForm" class="row g-3">
             <div class="col-md-4 col-12">
-                <label class="form-label font-weight-bold">اسم العميل / القاعة</label>
-                <input type="text" id="clientName" class="form-control" placeholder="مثلاً: قاعة النور" required>
+                <label class="form-label fw-bold">اسم العميل</label>
+                <input type="text" id="clientName" class="form-control" required>
             </div>
             <div class="col-md-4 col-6">
-                <label class="form-label">الخدمة</label>
+                <label class="form-label fw-bold">الخدمة</label>
                 <select id="serviceType" class="form-select">
                     <option value="ساوند سستم">ساوند سستم</option>
                     <option value="تصوير فيديو">تصوير فيديو</option>
@@ -42,67 +50,62 @@
                 </select>
             </div>
             <div class="col-md-4 col-6">
-                <label class="form-label">التاريخ</label>
+                <label class="form-label fw-bold">التاريخ</label>
                 <input type="date" id="eventDate" class="form-control" required>
             </div>
+            
+            <div class="col-md-6 col-12">
+                <label class="form-label fw-bold">مكان المناسبة (القاعة/المدينة)</label>
+                <input type="text" id="eventLocation" class="form-control" placeholder="أدخل الموقع هنا">
+            </div>
 
             <div class="col-md-3 col-6">
-                <label class="form-label">بداية الحفل</label>
+                <label class="form-label fw-bold">بداية الحفل</label>
                 <div class="input-group">
-                    <select id="startHour" class="form-select">
-                        <option value="1">1</option><option value="2">2</option><option value="3">3</option>
-                        <option value="4">4</option><option value="5">5</option><option value="6">6</option>
-                        <option value="7">7</option><option value="8">8</option><option value="9">9</option>
-                        <option value="10">10</option><option value="11">11</option><option value="12" selected>12</option>
-                    </select>
-                    <select id="startPeriod" class="form-select bg-light">
-                        <option value="م">م</option>
-                        <option value="ص">ص</option>
+                    <input type="number" id="startHour" class="form-control" value="12">
+                    <select id="startPeriod" class="form-select">
+                        <option value="م">م</option><option value="ص">ص</option>
                     </select>
                 </div>
             </div>
             <div class="col-md-3 col-6">
-                <label class="form-label">نهاية الحفل</label>
+                <label class="form-label fw-bold">نهاية الحفل</label>
                 <div class="input-group">
-                    <select id="endHour" class="form-select">
-                        <option value="1">1</option><option value="2">2</option><option value="3">3</option>
-                        <option value="4">4</option><option value="5">5</option><option value="6">6</option>
-                        <option value="7">7</option><option value="8">8</option><option value="9">9</option>
-                        <option value="10">10</option><option value="11">11</option><option value="12" selected>12</option>
-                    </select>
-                    <select id="endPeriod" class="form-select bg-light">
-                        <option value="م">م</option>
-                        <option value="ص">ص</option>
+                    <input type="number" id="endHour" class="form-control" value="12">
+                    <select id="endPeriod" class="form-select">
+                        <option value="م">م</option><option value="ص">ص</option>
                     </select>
                 </div>
             </div>
 
-            <div class="col-md-3 col-6">
-                <label class="form-label">المبلغ الكلي</label>
+            <div class="col-md-6 col-6">
+                <label class="form-label fw-bold text-success">المبلغ الكلي</label>
                 <input type="number" id="totalAmount" class="form-control" placeholder="0" required>
             </div>
-            <div class="col-md-3 col-6">
-                <label class="form-label">العربون</label>
+            <div class="col-md-6 col-6">
+                <label class="form-label fw-bold text-primary">العربون</label>
                 <input type="number" id="paidAmount" class="form-control" placeholder="0" required>
             </div>
 
-            <div class="col-12 pt-2">
-                <button type="submit" class="btn btn-save w-100 py-2 shadow-sm"><i class="fas fa-check-double me-1"></i> حفظ الحجز في السحابة</button>
+            <div class="col-12 mt-4">
+                <button type="submit" class="btn btn-save w-100 py-2 shadow-sm">
+                    <i class="fas fa-check-circle me-1"></i> حفظ الحجز في الجدول
+                </button>
             </div>
         </form>
     </div>
 
-    <div class="table-container shadow-sm border">
-        <h5 class="mb-4"><i class="fas fa-list-ul text-secondary"></i> سجل المواعيد (المرتب بالأقرب)</h5>
+    <div class="table-container shadow-sm">
+        <h5 class="mb-4 text-secondary"><i class="fas fa-calendar-alt me-2"></i> جدول المواعيد (المرتب بالأقرب)</h5>
         <div class="table-responsive">
             <table class="table table-hover align-middle text-center">
-                <thead class="table-light">
+                <thead class="table-dark">
                     <tr>
-                        <th>العميل</th>
-                        <th>النوع والوقت</th>
+                        <th>العميل والتاريخ</th>
+                        <th>الخدمة والموقع</th>
                         <th>المبلغ</th>
                         <th>المتبقي</th>
-                        <th>حذف</th>
+                        <th>إجراء</th>
                     </tr>
                 </thead>
                 <tbody id="bookingsTable"></tbody>
@@ -115,7 +118,7 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-    // بيانات الفايربيس (تأكد من وضع بياناتك الصحيحة هنا)
+    // --- ضع بيانات Firebase الخاصة بك هنا ---
     const firebaseConfig = {
   apiKey: "AIzaSyAKwgSqT8Aic3zk5GvliH7YJgX4POD_l8o",
   authDomain: "soundsystemapp.firebaseapp.com",
@@ -125,6 +128,7 @@
   appId: "1:296950691934:web:ad5838b7ca9e38ec3bdccf",
   measurementId: "G-PLMFR6LLB1"
 };
+
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
@@ -134,8 +138,6 @@
         
         const total = parseFloat(document.getElementById('totalAmount').value);
         const paid = parseFloat(document.getElementById('paidAmount').value);
-        const remaining = total - paid;
-        
         const startTime = document.getElementById('startHour').value + " " + document.getElementById('startPeriod').value;
         const endTime = document.getElementById('endHour').value + " " + document.getElementById('endPeriod').value;
 
@@ -144,24 +146,21 @@
                 client: document.getElementById('clientName').value,
                 service: document.getElementById('serviceType').value,
                 date: document.getElementById('eventDate').value,
+                location: document.getElementById('eventLocation').value || "غير محدد",
                 timeRange: `من ${startTime} إلى ${endTime}`,
                 total: total,
                 paid: paid,
-                remaining: remaining,
+                remaining: total - paid,
                 createdAt: new Date()
             });
             alert("تم الحفظ بنجاح ✅");
             location.reload();
-        } catch (error) {
-            alert("حدث خطأ! تأكد من إعدادات Firebase");
-        }
+        } catch (error) { alert("خطأ في الحفظ!"); }
     });
 
     async function loadBookings() {
         const tableBody = document.getElementById('bookingsTable');
         tableBody.innerHTML = ""; 
-
-        // التعديل الجديد: الترتيب حسب التاريخ (التصاعدي)
         const q = query(collection(db, "bookings"), orderBy("date", "asc"));
         const querySnapshot = await getDocs(q);
         
@@ -171,7 +170,11 @@
             tableBody.innerHTML += `
                 <tr>
                     <td><strong>${data.client}</strong><br><small class="text-muted">${data.date}</small></td>
-                    <td><span class="badge badge-service mb-1">${data.service}</span><br><small>${data.timeRange}</small></td>
+                    <td>
+                        <span class="badge bg-secondary mb-1">${data.service}</span><br>
+                        <small class="d-block text-muted">${data.timeRange}</small>
+                        <small class="location-text"><i class="fas fa-map-marker-alt"></i> ${data.location}</small>
+                    </td>
                     <td>${data.total}</td>
                     <td class="text-remaining">${data.remaining}</td>
                     <td>
@@ -183,15 +186,19 @@
     }
 
     window.deleteBooking = async (id) => {
-        if(confirm("هل تريد حذف هذا الحجز نهائياً؟")) {
+        if(confirm("حذف هذا الحجز؟")) {
             await deleteDoc(doc(db, "bookings", id));
             location.reload();
         }
     }
 
+    window.copyCustomerLink = () => {
+        const link = window.location.origin + window.location.pathname.replace('index.html', 'booking.html');
+        navigator.clipboard.writeText(link);
+        alert("تم نسخ رابط صفحة العملاء!");
+    }
+
     loadBookings();
 </script>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-                    </html>
+</html>
