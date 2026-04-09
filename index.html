@@ -58,13 +58,18 @@
         <div class="table-responsive">
             <table class="table table-hover align-middle mb-0 text-center">
                 <thead class="table-light">
-                    <tr>
-                        <th>التاريخ</th>
-                        <th>الخدمة</th>
-                        <th>الموقع</th>
-                    </tr>
-                </thead>
-                <tbody id="publicTable">
+    <tr>
+        <th>التاريخ والزمن</th> <th>الخدمة</th>
+        <th>الموقع</th>
+    </tr>
+</thead>
+                <tbody id="publicTa<thead class="table-light">
+    <tr>
+        <th>التاريخ والزمن</th> <th>الخدمة</th>
+        <th>الموقع</th>
+    </tr>
+</thead>
+ble">
                     </tbody>
             </table>
         </div>
@@ -89,23 +94,30 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    async function loadPublicData() {
+        async function loadPublicData() {
         const tableBody = document.getElementById('publicTable');
+        // جلب البيانات مرتبة حسب التاريخ
         const q = query(collection(db, "bookings"), orderBy("date", "asc"));
         const querySnapshot = await getDocs(q);
         
         tableBody.innerHTML = "";
         querySnapshot.forEach((doc) => {
             const data = doc.data();
+            // هنا التعديل لإظهار الوقت تحت التاريخ
             tableBody.innerHTML += `
                 <tr>
-                    <td><span class="badge bg-info text-dark">${data.date}</span></td>
+                    <td>
+                        <span class="badge bg-info text-dark">${data.date}</span>
+                        <div class="mt-1" style="font-size: 0.8rem; color: #555; font-weight: bold;">
+                           <i class="far fa-clock"></i> ${data.timeRange || 'طوال اليوم'}
+                        </div>
+                    </td>
                     <td>${data.service}</td>
                     <td><small>${data.location}</small></td>
                 </tr>
             `;
         });
-    }
+    
 
     window.goToAdmin = () => {
         const pass = prompt("الرجاء إدخال رمز دخول الإدارة:");
