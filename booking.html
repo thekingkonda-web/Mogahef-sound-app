@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>طلب حجز - خدمات الصوت والتصوير</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f0f2f5; padding: 20px; }
+        .booking-card { max-width: 500px; margin: auto; background: white; border-radius: 20px; padding: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .header-icon { font-size: 3rem; color: #25D366; margin-bottom: 20px; }
+        .btn-whatsapp { background-color: #25D366; color: white; font-weight: bold; border-radius: 10px; padding: 12px; border: none; }
+        .btn-whatsapp:hover { background-color: #128C7E; color: white; }
+    </style>
+</head>
+<body>
+
+<div class="booking-card text-center shadow-lg">
+    <i class="fab fa-whatsapp header-icon"></i>
+    <h3 class="mb-2">تواصل معنا للحجز</h3>
+    <p class="text-muted mb-4">يرجى ملء البيانات ليتم توجيهك للمحادثة المباشرة معي</p>
+    
+    <form id="customerForm" class="text-start">
+        <div class="mb-3">
+            <label class="form-label fw-bold">اسم العميل</label>
+            <input type="text" id="custName" class="form-control" placeholder="الاسم الكامل" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label fw-bold">نوع المناسبة</label>
+            <input type="text" id="eventType" class="form-control" placeholder="مثلاً: حفل زفاف" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label fw-bold">التاريخ المطلوب</label>
+            <input type="date" id="eventDate" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label fw-bold">مكان المناسبة</label>
+            <input type="text" id="eventLocation" class="form-control" placeholder="اسم القاعة أو الموقع" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label fw-bold">الخدمة المطلوبة</label>
+            <select id="serviceType" class="form-select">
+                <option value="ساوند سستم">ساوند سستم</option>
+                <option value="تصوير فوتوغرافي وفيديو">تصوير</option>
+                <option value="صوت وتصوير معاً">الصوت والتصوير معاً</option>
+            </select>
+        </div>
+        
+        <button type="submit" class="btn btn-whatsapp w-100 mt-3 shadow">
+            <i class="fab fa-whatsapp me-2"></i> إرسال الطلب عبر واتساب
+        </button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('customerForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById('custName').value;
+        const type = document.getElementById('eventType').value;
+        const date = document.getElementById('eventDate').value;
+        const location = document.getElementById('eventLocation').value;
+        const service = document.getElementById('serviceType').value;
+
+        // رقم واتساب الخاص بك
+        const phone = "249920219790";
+        
+        // تنسيق الرسالة
+        const message = `*طلب حجز جديد*%0A` +
+                        `-------------------%0A` +
+                        `*الاسم:* ${name}%0A` +
+                        `*المناسبة:* ${type}%0A` +
+                        `*التاريخ:* ${date}%0A` +
+                        `*المكان:* ${location}%0A` +
+                        `*الخدمة:* ${service}`;
+
+        // فتح رابط واتساب
+        window.location.href = `https://wa.me/${phone}?text=${message}`;
+    });
+</script>
+</body>
+</html>
